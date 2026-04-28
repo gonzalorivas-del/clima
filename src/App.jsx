@@ -1,4 +1,5 @@
 import { EvaluationProvider, useEvaluation } from './context/EvaluationContext';
+import tokens from './tokens/tokens.json';
 import EvaluationList from './components/EvaluationList';
 import EvaluationTypeModal from './components/modals/EvaluationTypeModal';
 import WizardLayout from './components/wizard/WizardLayout';
@@ -31,7 +32,7 @@ function AppContent() {
               bottom: '14px',
               left: '16px',
               fontSize: '12px',
-              color: '#9aafc5',
+              color: tokens.colors.dash.$value,
               background: 'none',
               border: 'none',
               cursor: 'pointer',
