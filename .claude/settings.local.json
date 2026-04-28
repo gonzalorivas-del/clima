@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_figma_figma__get_design_context",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('/Users/grivas/Clima/nuevaencuesta/manifest.json'\\)\\); [print\\(i, c.get\\('name',''\\)\\) for i,c in enumerate\\(d.get\\('components',[]\\)\\)]\")",
+      "Bash(python3 *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5175/)",
+      "Bash(npx vite *)",
+      "mcp__plugin_figma_figma__get_screenshot"
+    ]
+  }
+}
