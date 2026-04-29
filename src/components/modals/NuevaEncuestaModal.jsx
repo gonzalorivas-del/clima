@@ -120,7 +120,7 @@ export default function NuevaEncuestaModal({ isOpen, onClose, onSubmit }) {
             width: '100%',
           }}
         >
-          Nueva encuesta
+          Nuevo grupo de encuesta
         </h2>
 
         <div style={{
@@ -233,7 +233,7 @@ export default function NuevaEncuestaModal({ isOpen, onClose, onSubmit }) {
             icon={<ArrowRightIcon />}
             iconPosition="right"
           >
-            Crear nueva encuesta
+            Guardar y continuar
           </Button>
         </div>
       </div>

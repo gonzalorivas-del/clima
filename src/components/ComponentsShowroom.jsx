@@ -203,6 +203,70 @@ const SECTIONS = [
   { id: 'side-panel', label: 'SidePanel' },
 ];
 
+/* ─── Demo interactivo Card segment ─────────────────────────────────────────── */
+
+const MOCK_SEGMENTOS_DEMO = [
+  { id: 1, title: 'Gerencia', description: 'Colaboradores del área de gerencia y dirección ejecutiva.' },
+  { id: 2, title: 'Operaciones', description: 'Equipos de operaciones, logística y soporte de campo.' },
+  { id: 3, title: 'Comercial', description: 'Fuerza de ventas, account managers y preventa.' },
+];
+
+function SegmentCardDemo() {
+  const [seleccionado, setSeleccionado] = useState(null);
+
+  return (
+    <>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
+        {MOCK_SEGMENTOS_DEMO.map((seg) => (
+          <ShowcaseItem key={seg.id} label={seg.title} style={{ minWidth: 220 }}>
+            <div style={{ width: 240 }}>
+              <Card
+                variant="segment"
+                title={seg.title}
+                description={seg.description}
+                onVerMas={() => setSeleccionado(seg)}
+              />
+            </div>
+          </ShowcaseItem>
+        ))}
+      </div>
+
+      {seleccionado && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={seleccionado.title}
+          onClick={() => setSeleccionado(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            backgroundColor: 'rgba(0,0,0,0.45)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#fff', borderRadius: 12, padding: 24, minWidth: 320, maxWidth: 480,
+              boxShadow: '0px 8px 32px rgba(0,0,0,0.18)',
+              display: 'flex', flexDirection: 'column', gap: 16,
+            }}
+          >
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 600, color: '#1E5591', textAlign: 'center', fontFamily: 'Roboto, sans-serif' }}>
+              {seleccionado.title}
+            </h3>
+            <p style={{ margin: 0, fontSize: 14, color: '#666', fontFamily: 'Roboto, sans-serif', lineHeight: 1.5 }}>
+              {seleccionado.description}
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button variant="secondary" size="sm" onClick={() => setSeleccionado(null)}>Cerrar</Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 /* ─── Demo interactivo CardOption ─────────────────────────────────────────── */
 
 const CARD_OPTIONS_DEMO = [
@@ -940,7 +1004,7 @@ export default function ComponentsShowroom() {
         <section id="tarjetas" style={sectionStyle}>
           <div style={sectionHeadStyle}>
             <h2 style={sectionTitleStyle}>Tarjetas</h2>
-            <p style={sectionDescStyle}>Card — variantes default (contenido libre), platform (acceso) y kpi (métrica)</p>
+            <p style={sectionDescStyle}>Card — variantes default (contenido libre), platform (acceso), kpi (métrica) y segment (segmento de encuesta)</p>
           </div>
 
           <GroupLabel>Variante default</GroupLabel>
@@ -1026,6 +1090,11 @@ export default function ComponentsShowroom() {
               />
             </ShowcaseItem>
           </div>
+
+          <Divider />
+
+          <GroupLabel>Variante segment</GroupLabel>
+          <SegmentCardDemo />
         </section>
 
         {/* ══════════════════════════════════════════════

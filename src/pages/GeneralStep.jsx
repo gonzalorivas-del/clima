@@ -395,8 +395,8 @@ export default function GeneralStep() {
                 <Uploader
                   title="Formato esperado del archivo"
                   description={[
-                    'Columnas requeridas: nombre · Opcionales: rut empresa cargo familia_cargo',
-                    'Separador: punto y coma (;) o coma (,) · Codificación: UTF-8',
+                    'Puedes cargar los datos a una plantilla base predefinida.',
+                    'Descárgala desde el botón "Descargar plantilla", edita lo que necesites y luego impórtala aquí para continuar.',
                   ]}
                   supportText="Excel XLS o CSV / 5mb máximo."
                   accept=".xlsx,.xls,.csv"
@@ -417,7 +417,10 @@ export default function GeneralStep() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <p style={{ margin: 0, fontSize: 12, color: C.grisOscuro }}>
-                Importa automáticamente la nómina desde el módulo de Remuneraciones de Rex+.
+                Sincroniza con Rex+ Remuneraciones para descargar la nómina de colaboradores en formato Excel.
+              </p>
+              <p style={{ margin: 0, fontSize: 12, color: C.grisOscuro }}>
+                Luego, cárgala usando el importador.
               </p>
               <Button
                 variant="secondary"

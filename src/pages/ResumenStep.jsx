@@ -3,6 +3,7 @@ import { useEvaluation } from '../context/EvaluationContext';
 import tokens from '../tokens/tokens.json';
 import { Tabs } from '../components/Tabs';
 import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
 import arrowLeftSvg from '../assets/Arrow left.svg';
 import homeSvg from '../assets/Home.svg';
@@ -43,47 +44,30 @@ function horaToDisplay(hora) {
 
 // ── Mock data ──────────────────────────────────────────────────────────────────
 const MOCK_GRUPOS = [
-  { id: 'clima', nombre: 'Clima', colaboradores: 8, segmentos: 5 },
-  { id: 'pulso', nombre: 'Pulso', colaboradores: 8, segmentos: 5 },
+  { id: 'clima', nombre: 'Clima', colaboradores: 16, segmentos: 8 },
+  { id: 'pulso', nombre: 'Pulso', colaboradores: 8,  segmentos: 4 },
 ];
-const MOCK_PARTICIPANTES = 8;
+
+const MOCK_SEGMENTOS = {
+  clima: [
+    { id: 'c1', nombre: 'Segmento 1', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c2', nombre: 'Segmento 2', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c3', nombre: 'Segmento 3', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c4', nombre: 'Segmento 4', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c5', nombre: 'Segmento 5', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c6', nombre: 'Segmento 6', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c7', nombre: 'Segmento 7', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'c8', nombre: 'Segmento 8', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+  ],
+  pulso: [
+    { id: 'p1', nombre: 'Segmento 1', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'p2', nombre: 'Segmento 2', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'p3', nombre: 'Segmento 3', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+    { id: 'p4', nombre: 'Segmento 4', descripcion: 'Valor 1, Valor 2, Valor 3, +6' },
+  ],
+};
+
 const MOCK_PLANTILLA = 'Encuesta ECI';
-
-const GRUPOS_COLUMNS = [
-  { key: 'edad',      label: 'Edad',      count: 3 },
-  { key: 'area',      label: 'Área',      count: 3 },
-  { key: 'segmento1', label: 'Segmento 1' },
-  { key: 'segmento2', label: 'Segmento 2' },
-  { key: 'segmento3', label: 'Segmento 3' },
-  { key: 'segmento4', label: 'Segmento 4' },
-];
-
-const GRUPOS_ROWS = [
-  { id: 1, edad: 'De 42 a 50',  area: 'RRHH',       segmento1: 'Value 1', segmento2: 'Val A', segmento3: 'Val X', segmento4: 'Dato 1' },
-  { id: 2, edad: 'De 51 a 65',  area: 'Diseño',      segmento1: 'Value 2', segmento2: 'Val B', segmento3: 'Val Y', segmento4: 'Dato 2' },
-  { id: 3, edad: 'De 65 o más', area: 'Informática', segmento1: 'Value 3', segmento2: 'Val C', segmento3: 'Val Z', segmento4: 'Dato 3' },
-];
-const GRUPOS_TOTAL = 4;
-
-const PARTICIPANTES_COLS = [
-  { key: 'id',        label: 'Identificador nacional', fixed: true },
-  { key: 'nombre',    label: 'Nombre' },
-  { key: 'encuesta',  label: 'Encuesta' },
-  { key: 'edad',      label: 'Edad' },
-  { key: 'area',      label: 'Area' },
-  { key: 'segmento1', label: 'Segmento 1' },
-];
-
-const PARTICIPANTES_ROWS = [
-  { id: '11111111-1', nombre: 'María González',   encuesta: 'Clima', edad: 'De 42 a 50',  area: 'Desarrollo', segmento1: 'Value 1' },
-  { id: '11111111-1', nombre: 'Juan Pérez',        encuesta: 'Clima', edad: 'De 42 a 50',  area: 'Desarrollo', segmento1: 'Value 2' },
-  { id: '11111111-1', nombre: 'Ana López',         encuesta: 'Clima', edad: 'De 42 a 50',  area: 'Desarrollo', segmento1: 'Value 3' },
-  { id: '11111111-1', nombre: 'Carlos Rodríguez',  encuesta: 'Clima', edad: 'De 51 a 65',  area: 'Desarrollo', segmento1: 'Value 4' },
-  { id: '11111111-1', nombre: 'Sofía Martínez',    encuesta: 'Clima', edad: 'De 51 a 65',  area: 'Desarrollo', segmento1: 'Value 5' },
-  { id: '11111111-1', nombre: 'Pedro Castillo',    encuesta: 'Clima', edad: 'De 51 a 65',  area: 'Desarrollo', segmento1: 'Value 6' },
-  { id: '11111111-1', nombre: 'Laura Figueroa',    encuesta: 'Clima', edad: 'De 65 o más', area: 'Desarrollo', segmento1: 'Value 7' },
-  { id: '11111111-1', nombre: 'Diego Morales',     encuesta: 'Clima', edad: 'De 65 o más', area: 'Desarrollo', segmento1: 'Value 8' },
-];
 
 // ── Icons ──────────────────────────────────────────────────────────────────────
 function ChevronDown() {
@@ -99,51 +83,6 @@ function ChevronUp() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M18 15L12 9L6 15" stroke="currentColor" strokeWidth="1.5"
-        strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function SortIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-      <path d="M12 19V5M7 10L12 5L17 10" stroke={C.auxiliar} strokeWidth="1.5"
-        strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-      <circle cx="11" cy="11" r="7" stroke="#B6CEE7" strokeWidth="1.5" />
-      <path d="M16.5 16.5L21 21" stroke="#B6CEE7" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function ChevronDownSmall() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-      <path d="M10 13L16 19L22 13" stroke={C.grisOscuro} strokeWidth="1.5"
-        strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function PaginatorPrev() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M15 18L9 12L15 6" stroke={C.grisOscuro} strokeWidth="1.5"
-        strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function PaginatorNext() {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M9 6L15 12L9 18" stroke={C.grisOscuro} strokeWidth="1.5"
         strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -228,75 +167,78 @@ function InfoField({ label, children }) {
   );
 }
 
-// ── Tabla Grupos ───────────────────────────────────────────────────────────────
-function GrupoTabla() {
+// ── SegmentoModal ──────────────────────────────────────────────────────────────
+function SegmentoModal({ segmento, onClose }) {
+  if (!segmento) return null;
   return (
-    <div style={{ width: '100%', overflowX: 'auto', borderRadius: 8 }}>
-      <table style={{
-        width: '100%',
-        minWidth: 680,
-        borderCollapse: 'collapse',
-        fontFamily: 'Roboto, sans-serif',
-        backgroundColor: C.blanco,
-      }}>
-        <thead>
-          <tr>
-            {GRUPOS_COLUMNS.map(col => (
-              <th key={col.key} style={{
-                padding: '8px 12px',
-                backgroundColor: '#EDF2F4',
-                fontSize: 12,
-                fontWeight: 500,
-                color: C.negroTextos,
-                textAlign: 'left',
-                whiteSpace: 'nowrap',
-              }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                  {col.count !== undefined ? `${col.label} (${col.count})` : col.label}
-                  <SortIcon />
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {GRUPOS_ROWS.map((row, i) => (
-            <tr key={row.id}>
-              {GRUPOS_COLUMNS.map(col => (
-                <td key={col.key} style={{
-                  padding: '8px 12px',
-                  fontSize: 14,
-                  fontWeight: 400,
-                  color: C.negroTextos,
-                  borderBottom: i < GRUPOS_ROWS.length - 1 ? `1px solid ${C.auxiliar}` : 'none',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {String(row[col.key])}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={GRUPOS_COLUMNS.length} style={{
-              padding: '8px 12px',
-              fontSize: 12,
-              fontWeight: 400,
-              color: C.grisTextos,
-              borderTop: `1px solid ${C.auxiliar}`,
-            }}>
-              Total ({GRUPOS_TOTAL})
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="segmento-modal-title"
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 50,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 16,
+        backgroundColor: 'rgba(0,0,0,0.45)',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: C.blanco,
+          borderRadius: 16,
+          boxShadow: '0px 5px 8px rgba(0,0,0,0.15)',
+          width: 480,
+          maxWidth: '100%',
+          maxHeight: '80vh',
+          overflowY: 'auto',
+          padding: 24,
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+        }}
+      >
+        <h2
+          id="segmento-modal-title"
+          style={{
+            margin: 0,
+            fontSize: 18,
+            fontWeight: 500,
+            color: C.primario,
+            textAlign: 'center',
+            fontFamily: 'Roboto, sans-serif',
+          }}
+        >
+          {segmento.nombre}
+        </h2>
+        <p style={{
+          margin: 0,
+          fontSize: 14,
+          fontWeight: 400,
+          color: C.grisOscuro,
+          lineHeight: '20px',
+          fontFamily: 'Roboto, sans-serif',
+        }}>
+          {segmento.descripcion}
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button variant="secondary" size="md" onClick={onClose}>
+            Cerrar
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
 
-// ── GrupoCard ──────────────────────────────────────────────────────────────────
-function GrupoCard({ grupo, expanded, onToggle }) {
+// ── GrupoCard (con tarjetas de segmento) ───────────────────────────────────────
+function GrupoCard({ grupo, segmentos, expanded, onToggle, onVerMasSegmento }) {
   return (
     <div style={{
       backgroundColor: C.fondo,
@@ -328,253 +270,21 @@ function GrupoCard({ grupo, expanded, onToggle }) {
             <span style={chipBadgeStyle}>({grupo.colaboradores}) colaboradores participando</span>
             <span style={chipBadgeStyle}>({grupo.segmentos}) segmentos</span>
           </div>
-          <GrupoTabla />
-        </>
-      )}
-    </div>
-  );
-}
 
-// ── Tabla Participantes ────────────────────────────────────────────────────────
-function ParticipantesTabla() {
-  const rowBorder = `1px solid ${C.auxiliar}`;
-
-  const headerCellStyle = {
-    backgroundColor: C.blanco,
-    borderBottom: rowBorder,
-    display: 'flex',
-    gap: 4,
-    alignItems: 'center',
-    padding: '8px 4px 12px 8px',
-    flexShrink: 0,
-    width: '100%',
-    boxSizing: 'border-box',
-  };
-
-  const bodyCellStyle = (isLast) => ({
-    backgroundColor: C.blanco,
-    borderBottom: isLast ? 'none' : rowBorder,
-    display: 'flex',
-    alignItems: 'center',
-    height: 48,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 40,
-    paddingRight: 8,
-    flexShrink: 0,
-    width: '100%',
-    boxSizing: 'border-box',
-  });
-
-  const colFixed = {
-    flexShrink: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 1,
-  };
-
-  const colFlex = {
-    flex: '1 0 0',
-    minWidth: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 1,
-  };
-
-  const cellText = {
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: 14,
-    fontWeight: 400,
-    color: C.negroTextos,
-    lineHeight: 1.3,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    flex: '1 0 0',
-    minWidth: 0,
-  };
-
-  const headerText = {
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: 14,
-    fontWeight: 500,
-    color: '#000000',
-    whiteSpace: 'nowrap',
-    flexShrink: 0,
-  };
-
-  return (
-    <div style={{
-      backgroundColor: C.blanco,
-      borderRadius: 16,
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 1,
-    }}>
-
-      {/* ── Search header ── */}
-      <div style={{
-        backgroundColor: C.blanco,
-        height: 66,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 24px 0 8px',
-        flexShrink: 0,
-        borderRadius: '16px 16px 0 0',
-      }}>
-        {/* Left area (checkbox placeholder) */}
-        <div style={{ width: 48, height: 44 }} />
-
-        {/* Search input */}
-        <div style={{
-          width: 280,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingBottom: 8,
-          paddingTop: 8,
-          borderBottom: `1px solid ${C.auxiliar}`,
-        }}>
-          <span style={{
-            fontFamily: 'Roboto, sans-serif',
-            fontSize: 16,
-            fontWeight: 400,
-            color: '#CCCCCC',
-            lineHeight: 1.3,
-          }}>
-            Buscar contenido
-          </span>
-          <SearchIcon />
-        </div>
-      </div>
-
-      {/* ── Columns ── */}
-      <div style={{ display: 'flex', width: '100%', flexShrink: 0 }}>
-        {PARTICIPANTES_COLS.map((col, colIdx) => (
-          <div key={col.key} style={col.fixed ? colFixed : colFlex}>
-            {/* Header */}
-            <div style={headerCellStyle}>
-              <SortIcon />
-              <span style={headerText}>{col.label}</span>
-            </div>
-            {/* Cells */}
-            {PARTICIPANTES_ROWS.map((row, rowIdx) => (
-              <div key={rowIdx} style={bodyCellStyle(rowIdx === PARTICIPANTES_ROWS.length - 1)}>
-                <span style={cellText}>{row[col.key]}</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, width: '100%' }}>
+            {segmentos.map(seg => (
+              <div key={seg.id} style={{ flex: '1 0 calc(25% - 6px)', minWidth: 180 }}>
+                <Card
+                  variant="segment"
+                  title={seg.nombre}
+                  description={seg.descripcion}
+                  onVerMas={() => onVerMasSegmento(seg)}
+                />
               </div>
             ))}
           </div>
-        ))}
-      </div>
-
-      {/* ── Footer ── */}
-      <div style={{
-        backgroundColor: C.blanco,
-        display: 'flex',
-        alignItems: 'center',
-        borderRadius: '0 0 16px 16px',
-        flexShrink: 0,
-      }}>
-        {/* Total */}
-        <div style={{ flex: '1 0 0', minWidth: 0, padding: '12px 24px' }}>
-          <p style={{
-            margin: 0,
-            fontFamily: 'Roboto, sans-serif',
-            fontSize: 12,
-            fontWeight: 500,
-            color: C.grisTextos,
-          }}>
-            {`Total de {XXX} : 299`}
-          </p>
-        </div>
-
-        {/* Paginador */}
-        <div style={{
-          flex: '1 0 0',
-          minWidth: 0,
-          height: 69,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          paddingRight: 24,
-          gap: 16,
-        }}>
-          {/* Filas label */}
-          <span style={{
-            fontFamily: 'Roboto, sans-serif',
-            fontSize: 16,
-            fontWeight: 400,
-            color: C.negroTextos,
-            whiteSpace: 'nowrap',
-          }}>
-            Filas
-          </span>
-
-          {/* Row count selector */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            minWidth: 83,
-            height: 69,
-            gap: 4,
-          }}>
-            <span style={{ height: 16, fontSize: 12, color: C.grisTextos }}> </span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{
-                flex: 1,
-                fontFamily: 'Roboto, sans-serif',
-                fontSize: 16,
-                fontWeight: 400,
-                color: C.negroTextos,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}>
-                8
-              </span>
-              <ChevronDownSmall />
-            </div>
-            <div style={{ height: 1, backgroundColor: C.auxiliar }} />
-            <span style={{ height: 16, fontSize: 12, color: C.grisTextos }}> </span>
-          </div>
-
-          {/* Page navigation */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: 296, flexShrink: 0 }}>
-            <PaginatorPrev />
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              {[1, 2, 3, 4, 5].map(n => (
-                <div key={n} style={{
-                  width: 24, height: 24, padding: 4,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  <span style={{
-                    fontFamily: 'Roboto, sans-serif',
-                    fontSize: 14,
-                    fontWeight: 400,
-                    color: n === 1 ? C.importante : C.negroTextos,
-                    lineHeight: '24px',
-                    whiteSpace: 'nowrap',
-                  }}>
-                    {n}
-                  </span>
-                </div>
-              ))}
-              <div style={{ width: 24, height: 24, padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontFamily: 'Roboto, sans-serif', fontSize: 14, color: C.negroTextos }}>...</span>
-              </div>
-              <div style={{ width: 24, height: 24, padding: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontFamily: 'Roboto, sans-serif', fontSize: 14, color: C.negroTextos }}>20</span>
-              </div>
-            </div>
-
-            <PaginatorNext />
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
@@ -625,7 +335,6 @@ function EmptyNotifCard({ tipo }) {
   );
 }
 
-// ── Wizard tabs ────────────────────────────────────────────────────────────────
 // ── ResumenStep ────────────────────────────────────────────────────────────────
 export default function ResumenStep() {
   const {
@@ -649,11 +358,11 @@ export default function ResumenStep() {
     ? `${isoToDisplay(fechaInicio)} → ${isoToDisplay(fechaTermino)}`
     : '';
 
-  const [gruposExpandidos,     setGruposExpandidos]     = useState(
+  const [gruposExpandidos,   setGruposExpandidos]   = useState(
     Object.fromEntries(MOCK_GRUPOS.map(g => [g.id, true]))
   );
-  const [mostrarParticipantes, setMostrarParticipantes] = useState(false);
   const [mostrarRestricciones, setMostrarRestricciones] = useState(true);
+  const [segmentoSeleccionado, setSegmentoSeleccionado] = useState(null);
 
   const invitacion   = notificaciones.find(n => n.tipo === 'invitacion');
   const recordatorio = notificaciones.find(n => n.tipo === 'recordatorio');
@@ -674,6 +383,12 @@ export default function ResumenStep() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: C.fondo, fontFamily: 'Roboto, sans-serif', paddingBottom: 48 }}>
+
+      {/* ── Modal de segmento ──────────────────────────────────────────── */}
+      <SegmentoModal
+        segmento={segmentoSeleccionado}
+        onClose={() => setSegmentoSeleccionado(null)}
+      />
 
       {/* ── Breadcrumb ─────────────────────────────────────────────────── */}
       <div style={{ margin: '0 60px', paddingTop: 24 }}>
@@ -757,7 +472,7 @@ export default function ResumenStep() {
               </InfoField>
             </div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-              <InfoField label="Grupos">
+              <InfoField label="Encuestas">
                 <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginTop: 4 }}>
                   {MOCK_GRUPOS.map(g => (
                     <span key={g.id} style={chipBadgeStyle}>{g.nombre}</span>
@@ -769,7 +484,7 @@ export default function ResumenStep() {
           </div>
 
           <SectionTitleRow
-            title={`Grupos (${MOCK_GRUPOS.length})`}
+            title={`Segmentos por encuesta (${MOCK_GRUPOS.length})`}
             onEdit={() => setView('general')}
           />
 
@@ -777,33 +492,24 @@ export default function ResumenStep() {
             <GrupoCard
               key={grupo.id}
               grupo={grupo}
+              segmentos={MOCK_SEGMENTOS[grupo.id] || []}
               expanded={gruposExpandidos[grupo.id]}
               onToggle={() => toggleGrupo(grupo.id)}
+              onVerMasSegmento={seg => setSegmentoSeleccionado(seg)}
             />
           ))}
         </div>
 
-        {/* ── SECCIÓN 2: Participantes ───────────────────────────── */}
+        {/* ── SECCIÓN 2: Archivo importado ───────────────────────── */}
         <div style={sectionCard}>
 
-          <SectionTitleRow title="Participantes" />
+          <SectionTitleRow title="Archivo importado" onEdit={() => setView('general')} />
 
-          <div style={{ backgroundColor: '#EDF2F4', padding: '8px 16px', borderRadius: 4 }}>
-            <p style={{ margin: 0, fontSize: 12, color: C.negroTextos }}>
-              <strong>({MOCK_PARTICIPANTES})</strong> colaboradores
+          <div style={{ backgroundColor: '#EDF2F4', padding: '8px 16px' }}>
+            <p style={{ margin: 0, fontSize: 16, fontWeight: 400, color: C.negroTextos, lineHeight: '1.3', fontFamily: 'Roboto, sans-serif' }}>
+              <strong>{'nóminaGeneral.xls  - (8)'}</strong>{' colaboradores'}
             </p>
           </div>
-
-          {/* Chip con ancho según contenido */}
-          <div style={{ alignSelf: 'flex-start' }}>
-            <Chip
-              label={mostrarParticipantes ? 'Ocultar lista' : 'Ver lista completa'}
-              expanded={mostrarParticipantes}
-              onClick={() => setMostrarParticipantes(v => !v)}
-            />
-          </div>
-
-          {mostrarParticipantes && <ParticipantesTabla />}
         </div>
 
         {/* ── SECCIÓN 3: Notificaciones configuradas ─────────────── */}
@@ -836,11 +542,10 @@ export default function ResumenStep() {
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', width: '100%' }}>
             <img src={alertPng} width="24" height="24" alt="" aria-hidden="true" />
             <p style={{ margin: 0, fontSize: 16, fontWeight: 500, color: C.panel }}>
-              Una vez activado, algunos parámetros no podrán modificarse
+              Una vez creado, algunos parámetros no podrán modificarse
             </p>
           </div>
 
-          {/* Chip con ancho según contenido */}
           <div style={{ width: '100%' }}>
             <Chip
               label={mostrarRestricciones ? 'Ocultar' : 'Ver más'}
@@ -863,7 +568,9 @@ export default function ResumenStep() {
                 </div>
                 <ul style={{ margin: 0, paddingLeft: 53, display: 'flex', flexDirection: 'column', gap: 8 }}>
                   <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Datos generales</li>
-                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Notificaciones</li>
+                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Archivo importado</li>
+                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Noticias</li>
+                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Segmentos</li>
                 </ul>
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 16, padding: '8px 0', justifyContent: 'center' }}>
@@ -874,7 +581,8 @@ export default function ResumenStep() {
                   </p>
                 </div>
                 <ul style={{ margin: 0, paddingLeft: 53, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Participantes</li>
+                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Agregar encuestas</li>
+                  <li style={{ fontSize: 14, fontWeight: 400, color: C.grisOscuro, lineHeight: '20px' }}>Agregar/eliminar preguntas de plantilla relacionada(s)</li>
                 </ul>
               </div>
             </div>

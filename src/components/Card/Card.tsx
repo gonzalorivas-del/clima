@@ -48,7 +48,15 @@ export interface CardKpiProps extends CardCommon {
   trendLabel?: string;
 }
 
-export type CardProps = CardDefaultProps | CardPlatformProps | CardKpiProps;
+/** Card de segmento: título, descripción y acción "Ver más" */
+export interface CardSegmentProps extends CardCommon {
+  variant: 'segment';
+  title: string;
+  description: string;
+  onVerMas?: () => void;
+}
+
+export type CardProps = CardDefaultProps | CardPlatformProps | CardKpiProps | CardSegmentProps;
 
 /* ─── Iconos de tendencia ────────────────────────────────────────────────── */
 
@@ -72,6 +80,17 @@ function TrendFlat() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <path d="M2 7h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/* ─── Ícono ojo ─────────────────────────────────────────────────────────── */
+
+function EyeIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -147,6 +166,21 @@ function KpiLayout({
   );
 }
 
+function SegmentLayout({ title, description, onVerMas }: Omit<CardSegmentProps, 'variant' | 'className' | 'onClick'>) {
+  return (
+    <div className={styles.segmentLayout}>
+      <p className={styles.segmentTitle}>{title}</p>
+      <p className={styles.segmentDescription}>{description}</p>
+      <div className={styles.segmentAction}>
+        <button type="button" onClick={onVerMas} className={styles.segmentVerMas}>
+          <EyeIcon />
+          <span>Ver más</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Componente principal ───────────────────────────────────────────────── */
 
 /**
@@ -156,7 +190,7 @@ function KpiLayout({
 export function Card(props: CardProps) {
   const { variant = 'default', className, onClick } = props;
 
-  const isInteractive = Boolean(onClick) || variant === 'platform';
+  const isInteractive = Boolean(onClick) || variant === 'platform' || variant === 'segment';
 
   const rootClass = [
     styles.card,
@@ -201,6 +235,14 @@ export function Card(props: CardProps) {
           value={(props as CardKpiProps).value}
           trend={(props as CardKpiProps).trend}
           trendLabel={(props as CardKpiProps).trendLabel}
+        />
+      )}
+
+      {variant === 'segment' && (
+        <SegmentLayout
+          title={(props as CardSegmentProps).title}
+          description={(props as CardSegmentProps).description}
+          onVerMas={(props as CardSegmentProps).onVerMas}
         />
       )}
     </Tag>

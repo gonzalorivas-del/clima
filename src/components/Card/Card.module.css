@@ -198,3 +198,63 @@
   font-weight: 400;
   color: #999999;                                  /* colors.gris-textos */
 }
+
+/* ─── Variante: segment ───────────────────────────────────────────────────── */
+.variant-segment {
+  border-radius: 16px;
+  padding: 8px;
+  border: none;
+  box-shadow: none;
+}
+
+.segmentLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.segmentTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  font-family: 'Roboto', sans-serif;
+  line-height: normal;
+  width: 100%;
+}
+
+.segmentDescription {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+  font-family: 'Roboto', sans-serif;
+  line-height: 20px;
+  width: 100%;
+}
+
+.segmentAction {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.segmentVerMas {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #00B4FF;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  line-height: normal;
+}
+
+.segmentVerMas:hover {
+  opacity: 0.8;
+}

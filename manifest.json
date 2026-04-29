@@ -576,7 +576,7 @@
       "name": "Card",
       "status": "implemented",
       "file": "src/components/Card/Card.tsx",
-      "description": "Contenedor con elevación para agrupar información. Tres variantes estructurales: default (contenido libre), platform (acceso a plataformas Rex+ con logo circular, título, descripción y CTA), kpi (métricas numéricas con ícono, valor, título y tendencia). La tendencia usa colores semánticos: positiva (dark-success), negativa (error), plana (gris-deshabilitado).",
+      "description": "Contenedor con elevación para agrupar información. Cuatro variantes estructurales: default (contenido libre), platform (acceso a plataformas Rex+ con logo circular, título, descripción y CTA), kpi (métricas numéricas con ícono, valor, título y tendencia), segment (tarjeta de segmento con título, descripción y acción 'Ver más'). La tendencia usa colores semánticos: positiva (dark-success), negativa (error), plana (gris-deshabilitado).",
       "variants": [
         {
           "name": "default",
@@ -589,6 +589,10 @@
         {
           "name": "kpi",
           "description": "Métrica de dashboard. Ícono 32×32px en fondo fondo, título en mayúsculas 13px, valor en Montserrat Bold 32px, tendencia porcentual con ícono de flecha y etiqueta de contexto."
+        },
+        {
+          "name": "segment",
+          "description": "Tarjeta de segmento de encuesta. Título (14px medium #333), descripción (14px regular #666, line-height 20px) y botón 'Ver más' con ícono ojo (#00B4FF). Sin sombra ni borde; border-radius 16px, padding 8px."
         }
       ],
       "states": [
@@ -613,7 +617,8 @@
             "values": [
               "default",
               "platform",
-              "kpi"
+              "kpi",
+              "segment"
             ],
             "default": "default",
             "required": false,
@@ -711,6 +716,26 @@
             "required": false,
             "description": "Texto de contexto junto a la tendencia."
           }
+        ],
+        "segment": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "description": "Nombre del segmento. 14px medium #333333."
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "description": "Descripción del segmento. 14px regular #666666, line-height 20px."
+          },
+          {
+            "name": "onVerMas",
+            "type": "function",
+            "required": false,
+            "description": "Callback del botón 'Ver más' (ícono ojo + texto). Abre modal de detalle del segmento."
+          }
         ]
       },
       "tokens": [
@@ -778,6 +803,11 @@
           "token": "zafiro.margin.m-3",
           "value": "8px",
           "usage": "Gap interno entre elementos"
+        },
+        {
+          "token": "colors.info",
+          "value": "#00B4FF",
+          "usage": "Botón 'Ver más' del segmento"
         }
       ],
       "effects": {
@@ -790,7 +820,7 @@
           "value": "0px 4px 16px rgba(0, 0, 0, 0.12)"
         }
       },
-      "notes": "Usa discriminated union TypeScript: CardDefaultProps | CardPlatformProps | CardKpiProps. Exporta tipos: CardProps, CardDefaultProps, CardPlatformProps, CardKpiProps. El valor KPI usa Montserrat (fuente heading) por ser un título de alto nivel."
+      "notes": "Usa discriminated union TypeScript: CardDefaultProps | CardPlatformProps | CardKpiProps | CardSegmentProps. Exporta tipos: CardProps, CardDefaultProps, CardPlatformProps, CardKpiProps, CardSegmentProps. El valor KPI usa Montserrat (fuente heading) por ser un título de alto nivel. La variante segment no tiene sombra ni borde; es interactiva (cursor pointer + hover lift) gracias al flag isInteractive."
     },
     {
       "name": "CardOption",
